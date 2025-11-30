@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wool Monitor - Mobile App Wireframes</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .wireframe-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .wireframe-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .wireframe-header h1 {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .wireframe-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .mobile-frame {
+            background: #333;
+            padding: 20px;
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-frame:hover {
+            transform: translateY(-10px);
+        }
+        
+        .mobile-screen {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            height: 600px;
+            position: relative;
+        }
+        
+        .screen-header {
+            background: linear-gradient(45deg, #0f3460, #16537e);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .screen-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .screen-content {
+            padding: 1.5rem;
+            height: calc(100% - 80px);
+            overflow-y: auto;
+        }
+        
+        .mobile-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 1rem;
+            border-left: 4px solid #00d4ff;
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .mobile-btn {
+            background: linear-gradient(45deg, #00d4ff, #0099cc);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4);
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+        
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #00d4ff;
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .status-online { background: #e8f5e8; color: #2e7d32; }
+        .status-offline { background: #ffebee; color: #d32f2f; }
+        
+        .metric-display {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .metric-item {
+            text-align: center;
+            padding: 1rem;
+            background: #f0f8ff;
+            border-radius: 10px;
+        }
+        
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #16537e;
+        }
+        
+        .metric-label {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+        
+        .camera-preview {
+            width: 100%;
+            height: 200px;
+            background: #f0f0f0;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 3rem;
+            margin: 1rem 0;
+        }
+        
+        .batch-timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .batch-timeline::before {
+            content: '';
+            position: absolute;
+            left: 1rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #00d4ff;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 1.5rem;
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -1.5rem;
+            top: 1rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #00d4ff;
+        }
+        
+        .timeline-item.completed::before {
+            background: #00ff88;
+        }
+        
+        .timeline-item.pending::before {
+            background: #ffd700;
+        }
+        
+        .features-list {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+        }
+        
+        .features-list h3 {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        
+        .feature-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="wireframe-container">
+        <div class="wireframe-header">
+            <h1>📱 Wool Monitor - Mobile App Wireframes</h1>
+            <p>Farmer-friendly interface for field operations with offline capability</p>
+        </div>
+        
+        <div class="wireframe-grid">
+            <!-- Login Screen -->
+            <div class="mobile-frame">
+                <div class="mobile-screen">
+                    <div class="screen-header">
+                        <div class="screen-title">🔐 Login</div>
+                        <div class="status-indicator status-online">Online</div>
+                    </div>
+                    <div class="screen-content">
+                        <div style="text-align: center; margin: 2rem 0;">
+                            <div style="font-size: 4rem; margin-bottom: 1rem;">🐑</div>
+                            <h3>Wool Monitor</h3>
+                            <p>Farm to Fabric Tracking</p>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>📧 Email</label>
+                            <input type="email" placeholder="farmer@example.com">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>🔒 Password</label>
+                            <input type="password" placeholder="••••••••">
+                        </div>
+                        
+                        <button class="mobile-btn">🔓 Login with Biometric</button>
+                        <button class="mobile-btn" style="background: linear-gradient(45deg, #00ff88, #00cc6a); margin-top: 0.5rem;">📱 Login with PIN</button>
+                        
+                        <div style="text-align: center; margin-top: 2rem; color: #666;">
+                            <p>🌐 Works offline • 🔒 Secure • 🚀 Fast</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Dashboard Screen -->
+            <div class="mobile-frame">
+                <div class="mobile-screen">
+                    <div class="screen-header">
+                        <div class="screen-title">🏠 Dashboard</div>
+                        <div class="status-indicator status-online">Synced</div>
+                    </div>
+                    <div class="screen-content">
+                        <div class="metric-display">
+                            <div class="metric-item">
+                                <div class="metric-value">24</div>
+                                <div class="metric-label">🐑 Animals</div>
+                            </div>
+                            <div class="metric-item">
+                                <div class="metric-value">3</div>
+                                <div class="metric-label">📦 Batches</div>
+                            </div>
+                            <div class="metric-item">
+                                <div class="metric-value">92%</div>
+                                <div class="metric-label">🏆 Quality</div>
+                            </div>
+                            <div class="metric-item">
+                                <div class="metric-value">🟢</div>
+                                <div class="metric-label">Health Status</div>
+                            </div>
+                        </div>
+                        
+                        <div class="mobile-card">
+                            <h4>📷 Quick Actions</h4>
+                            <button class="mobile-btn">📸 Scan Wool Sample</button>
+                        </div>
+                        
+                        <div class="mobile-card">
+                            <h4>🐑 Animal Health</h4>
+                            <p>2 animals need attention</p>
+                            <button class="mobile-btn">👀 View Details</button>
+                        </div>
+                        
+                        <div class="mobile-card">
+                            <h4>⛓️ Batch Tracking</h4>
+                            <p>WOL-2024-000123 in processing</p>
+                            <button class="mobile-btn">📍 Track Progress</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Animal Registration Screen -->
+            <div class="mobile-frame">
+                <div class="mobile-screen">
+                    <div class="screen-header">
+                        <div class="screen-title">🐑 Add Animal</div>
+                        <div class="status-indicator status-offline">Offline</div>
+                    </div>
+                    <div class="screen-content">
+                        <div class="camera-preview">📷</div>
+                        <button class="mobile-btn">📸 Take Photo</button>
+                        
+                        <div class="form-group">
+                            <label>🏷️ Animal Type</label>
+                            <select>
+                                <option>Sheep</option>
+                                <option>Goat</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>🧬 Breed</label>
+                            <input type="text" placeholder="Merino">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>⚖️ Weight (kg)</label>
+                            <input type="number" placeholder="45.5">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>📅 Age (months)</label>
+                            <input type="number" placeholder="18">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>📍 Location</label>
+                            <input type="text" placeholder="Auto-detected via GPS" readonly>
+                        </div>
+                        
+                        <button class="mobile-btn">💾 Save (Offline)</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Quality Assessment Screen -->
+            <div class="mobile-frame">
+                <div class="mobile-screen">
+                    <div class="screen-header">
+                        <div class="screen-title">🤖 AI Quality Scan</div>
+                        <div class="status-indicator status-online">AI Ready</div>
+                    </div>
+                    <div class="screen-content">
+                        <div class="camera-preview">🔬</div>
+                        <button class="mobile-btn">📸 Capture Sample</button>
+                        
+                        <div class="mobile-card">
+                            <h4>🤖 AI Analysis Results</h4>
+                            <div class="metric-display">
+                                <div class="metric-item">
+                                    <div class="metric-value">85.2μm</div>
+                                    <div class="metric-label">Fiber Diameter</div>
+                                </div>
+                                <div class="metric-item">
+                                    <div class="metric-value">92.5mm</div>
+                                    <div class="metric-label">Staple Length</div>
+                                </div>
+                                <div class="metric-item">
+                                    <div class="metric-value">94.1%</div>
+                                    <div class="metric-label">Color Consistency</div>
+                                </div>
+                                <div class="metric-item">
+                                    <div class="metric-value">Premium</div>
+                                    <div class="metric-label">Overall Grade</div>
+                                </div>
+                            </div>
+                            <div style="text-align: center; margin-top: 1rem;">
+                                <span class="status-indicator" style="background: #e8f5e8; color: #2e7d32;">
+                                    96.7% Confidence
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <button class="mobile-btn">⛓️ Add to Blockchain</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Batch Tracking Screen -->
+            <div class="mobile-frame">
+                <div class="mobile-screen">
+                    <div class="screen-header">
+                        <div class="screen-title">📦 Batch Tracking</div>
+                        <div class="status-indicator status-online">Live</div>
+                    </div>
+                    <div class="screen-content">
+                        <div class="mobile-card">
+                            <h4>⛓️ WOL-2024-000123</h4>
+                            <p><strong>Status:</strong> Processing</p>
+                            <p><strong>Quality:</strong> Premium (92.5%)</p>
+                            <p><strong>Location:</strong> Gujarat Processing Unit</p>
+                        </div>
+                        
+                        <div class="batch-timeline">
+                            <div class="timeline-item completed">
+                                <h5>🏡 Farm Collection</h5>
+                                <p>Completed: Jan 15, 2024</p>
+                                <p>Location: Rajasthan Wool Farm</p>
+                            </div>
+                            
+                            <div class="timeline-item completed">
+                                <h5>✂️ Shearing Process</h5>
+                                <p>Completed: Jan 16, 2024</p>
+                                <p>Quality: Premium Grade</p>
+                            </div>
+                            
+                            <div class="timeline-item completed">
+                                <h5>🏭 Processing Unit</h5>
+                                <p>In Progress: Jan 17, 2024</p>
+                                <p>Location: Gujarat</p>
+                            </div>
+                            
+                            <div class="timeline-item pending">
+                                <h5>🏢 Manufacturing</h5>
+                                <p>Pending</p>
+                                <p>Expected: Jan 20, 2024</p>
+                            </div>
+                            
+                            <div class="timeline-item pending">
+                                <h5>🏪 Retail Distribution</h5>
+                                <p>Pending</p>
+                                <p>Expected: Jan 25, 2024</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Health Monitoring Screen -->
+            <div class="mobile-frame">
+                <div class="mobile-screen">
+                    <div class="screen-header">
+                        <div class="screen-title">⚕️ Health Monitor</div>
+                        <div class="status-indicator status-online">IoT Active</div>
+                    </div>
+                    <div class="screen-content">
+                        <div class="mobile-card">
+                            <h4>🐑 Animal #A001</h4>
+                            <div class="metric-display">
+                                <div class="metric-item">
+                                    <div class="metric-value">38.5°C</div>
+                                    <div class="metric-label">🌡️ Temperature</div>
+                                </div>
+                                <div class="metric-item">
+                                    <div class="metric-value">85 BPM</div>
+                                    <div class="metric-label">💓 Heart Rate</div>
+                                </div>
+                                <div class="metric-item">
+                                    <div class="metric-value">High</div>
+                                    <div class="metric-label">🏃 Activity</div>
+                                </div>
+                                <div class="metric-item">
+                                    <div class="metric-value">🟢</div>
+                                    <div class="metric-label">Status</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mobile-card">
+                            <h4>🚨 Recent Alerts</h4>
+                            <p>✅ All animals healthy</p>
+                            <p>📊 Last check: 2 minutes ago</p>
+                        </div>
+                        
+                        <div class="mobile-card">
+                            <h4>📈 Health Trends</h4>
+                            <p>📊 Temperature: Stable</p>
+                            <p>🏃 Activity: Increased 15%</p>
+                            <p>💓 Heart Rate: Normal range</p>
+                        </div>
+                        
+                        <button class="mobile-btn">📞 Call Veterinarian</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="features-list">
+            <h3>📱 Mobile App Key Features</h3>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">🔒</div>
+                    <h4>Biometric Security</h4>
+                    <p>Fingerprint and face recognition for secure access</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">📡</div>
+                    <h4>Offline Capability</h4>
+                    <p>Works in remote areas without internet connectivity</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">🤖</div>
+                    <h4>AI-Powered Analysis</h4>
+                    <p>Real-time wool quality assessment using computer vision</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">⛓️</div>
+                    <h4>Blockchain Integration</h4>
+                    <p>Immutable record keeping and batch verification</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">📍</div>
+                    <h4>GPS Tracking</h4>
+                    <p>Automatic location detection for farm operations</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">🌐</div>
+                    <h4>Multi-Language</h4>
+                    <p>Support for Hindi, English, and regional languages</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">📊</div>
+                    <h4>Real-time Analytics</h4>
+                    <p>Live dashboard with production metrics and trends</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">🔔</div>
+                    <h4>Smart Notifications</h4>
+                    <p>Alerts for health issues, quality deviations, and updates</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
